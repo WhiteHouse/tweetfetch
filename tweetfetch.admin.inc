@@ -27,12 +27,26 @@ function tweetfetch_admin_config() {
 
   $form['tweetfetch_request'] = array(
     '#type' => 'textarea',
-    '#title' => t('Twitter Timeline API request'),
+    '#title' => t('Twitter Timeline API request (tweetfetch_request)'),
     '#default_value' => variable_get('tweetfetch_request', ''),
     '#description' => t('Enter a GET request for any timeline documented on !docs', array('!docs' => url('https://dev.twitter.com/docs/api/1.1'))),
     '#rows' => 2,
   );
-
+  $form['tweetfetch_since_id'] = array(
+    '#type' => 'textfield',
+    '#title' => 'tweetfetch_since_id',
+    '#default_value' => variable_get('tweetfetch_since_id', ''),
+    '#description' => t('Fetch all tweets since (after) tweet ID specified here'),
+    '#size' => 25,
+  );
+  $form['tweetfetch_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'tweetfetch_count',
+    '#disabled' => TRUE,
+    '#default_value' => variable_get('tweetfetch_count', ''),
+    '#description' => t('Running count of tweets fetched'),
+    '#size' => 25,
+  );
   $form['tweetfetch_debug'] = array(
     '#type' => 'checkbox',
     '#title' => t('Debug'),
