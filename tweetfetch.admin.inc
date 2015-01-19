@@ -124,7 +124,7 @@ function tweetfetch_fetch_tryit($form, &$form_state) {
       dpm($response, 'response');
     }
     else {
-      drupal_set_message("<pre>$response</pre>");
+      drupal_set_message("<pre>" . print_r($response, TRUE) . "</pre>");
     }
   }
 

@@ -40,14 +40,21 @@ function tweetfetch_fetch() {
     return FALSE;
   }
 
-  // Flip tweets order so they get saved from older to newer.
-  $tweets = array_reverse($tweets);
-
   // Get $count variable. Use this to keep track of numbered tweets stored and
   // written to JSON files like 0.json, 1.json, 2.json,... N.json.
   $count = variable_get('tweetfetch_count', '');
 
-  foreach ($tweets as $tweet) {
+  if (isset($tweets['statuses'])) {
+    $tweet_list = $tweets['statuses'];
+  }
+  else {
+    $tweet_list = $tweets;
+  }
+
+  // Flip tweets order so they get saved from older to newer.
+  $tweet_list = array_reverse($tweet_list);
+
+  foreach ($tweet_list as $tweet) {
 
     // Get unix timestamp for time when tweet was created.
     $created_timestamp = strtotime($tweet['created_at']);
@@ -119,7 +126,7 @@ function tweetfetch_fetch() {
   variable_set('tweetfetch_count', $count);
 
   // Return full Twitter API response.
-  return $tweets;
+  return $tweet_list;
 }
 
 /**
