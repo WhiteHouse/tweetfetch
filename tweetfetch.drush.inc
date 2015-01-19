@@ -58,7 +58,8 @@ function drush_tweetfetch_fetch() {
   $tweets = tweetfetch_fetch();
 
   $count = ($tweets) ? count($tweets) : 0;
-  drush_print($count . " new tweets fetched.");
+  $time = date('Y-m-d H:i:s', time());
+  drush_print("{$time} New tweets fetched: {$count}");
 }
 
 /**
